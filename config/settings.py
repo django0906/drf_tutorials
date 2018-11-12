@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'drf_tutorials.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
