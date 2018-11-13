@@ -1,10 +1,9 @@
 from django.urls import path, include
-from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('django-fbv/', include('snippets.urls.django_fbv')),
     path('drf-cbv/', include('snippets.urls.drf_cbv')),
     path('drf-fbv/', include('snippets.urls.drf_fbv')),
+    path('drf-mixin/', include('snippets.urls.drf_mixin')),
+    path('drf-generics/', include('snippets.urls.drf_generics')),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
