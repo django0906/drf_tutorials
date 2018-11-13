@@ -1,3 +1,5 @@
+from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
 
 from snippets.models import (
@@ -5,6 +7,8 @@ from snippets.models import (
     LANGUAGE_CHOICES,
     STYLE_CHOICES,
 )
+
+User = get_user_model()
 
 
 # ModelSerializer로 어느 model에 대해 직렬화 할것인지
@@ -36,3 +40,13 @@ class SnippetSerializer(serializers.ModelSerializer):
         instance.title = validated_data.get('title', instance.title)
 
         return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'username',
+            'snippet_set',
+        )
