@@ -3,6 +3,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('django-fbv/', include('snippets.urls.django_fbv')),
+    path('drf-cbv/', include('snippets.urls.drf_cbv')),
     path('drf-fbv/', include('snippets.urls.drf_fbv')),
 ]
 
