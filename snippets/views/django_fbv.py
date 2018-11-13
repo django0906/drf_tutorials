@@ -12,10 +12,11 @@ __all__ = (
 
 
 @api_view(['GET', 'POST'])
-def snippet_list(request):
+def snippet_list(request, format=None):
     """
     GET: list를 보여줌
     POST: 새 snippet을 만듦.
+    :param format:
     :param request:
     :return:
     """
@@ -33,11 +34,12 @@ def snippet_list(request):
 
 
 @api_view(['GET', 'PATCH', 'PUT', 'DELETE'])
-def snippet_detail(request, pk):
+def snippet_detail(request, pk, format=None):
     """
     GET with PK: 특정 snippet을 pk를 통해 조회
     PUT: 특정 snippet을 update함
     DELETE: 특정 snippet을 delete함
+    :param format:
     :param request:
     :param pk:
     :return:

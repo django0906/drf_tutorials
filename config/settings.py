@@ -126,8 +126,26 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# REST
+# Django REST framework settings
+# https://www.django-rest-framework.org/api-guide/renderers/#setting-the-renderers
+# https://www.django-rest-framework.org/api-guide/parsers/#setting-the-parsers
+# 요청에 따라 browsable-api, xml, yaml, json 형태로 직렬화/역직렬화 하여 데이터를 보내준다.
+# 클라이언트가 어떤 형태의 데이터를 원한다면, 그에 맞추어 제공하면 된다.
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework_yaml.renderers.YAMLRenderer',
+        'rest_framework_xml.renderers.XMLRenderer',
+    ),
+
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework_yaml.parsers.YAMLParser',
+        'rest_framework_xml.parsers.XMLParser',
+    ),
 }
