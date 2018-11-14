@@ -4,19 +4,46 @@ from rest_framework import serializers
 
 from snippets.models import (
     Snippet,
-    LANGUAGE_CHOICES,
-    STYLE_CHOICES,
 )
 
 User = get_user_model()
 
 
+# UserSerializer에 대하여 여러가지 Serializer를 동시에 선언해도 됨.
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'username',
+        )
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    # 중복을 최대한 피함
+    class Meta(UserSerializer.Meta):
+        fields = UserSerializer.Meta.fields + (
+            'snippet_set',
+        )
+
+
 # ModelSerializer로 어느 model에 대해 직렬화 할것인지
 # 보다 명확하게 알 수 있다(a bit more concise).
 class SnippetSerializer(serializers.ModelSerializer):
+    # owner = serializers.ReadOnlyField(source='owner.username')
+    owner = UserDetailSerializer()
+
     class Meta:
         model = Snippet
-        fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
+        fields = (
+            'pk',
+            'owner',
+            'title',
+            'code',
+            'linenos',
+            'language',
+            'style',
+        )
 
     def create(self, validated_data):
         """
@@ -41,12 +68,3 @@ class SnippetSerializer(serializers.ModelSerializer):
 
         return instance
 
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = (
-            'pk',
-            'username',
-            'snippet_set',
-        )

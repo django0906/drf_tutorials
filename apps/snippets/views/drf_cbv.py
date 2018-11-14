@@ -22,7 +22,6 @@ class SnippetList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# TODO: https://dev.to/enether/managing-restful-urls-in-django-rest-framework
 # put과 patch는 partial 요소로 구별한다.
 class SnippetDetail(APIView):
     def get_object(self, pk):
